@@ -228,6 +228,7 @@
     border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#000;
   }
   .video-frame.portrait{ max-width:300px; }
+  .video-frame.square{ max-width:360px; }
   .video-frame.landscape{ max-width:520px; }
   .video-frame video{ display:block; width:100%; height:auto; }
   .demo-item figcaption h3{ font-size:18px; margin-bottom:8px; }
@@ -623,6 +624,7 @@
             <span class="pill">PyTorch</span><span class="pill">Raspberry Pi</span><span class="pill">Linux</span>
           </div>
           <div class="proj-links">
+            <a href="#demo-camera">Voir la démo ↗</a>
             <a href="https://github.com/Touwendez/Projet-Vision-embarqu-e-sur-Raspberry-Pi-D-tection-de-personnes" target="_blank" rel="noopener">Voir le dépôt ↗</a>
           </div>
         </div>
@@ -789,6 +791,28 @@
           <div class="proj-links">
             <a href="#projects">↑ Voir le projet</a>
             <a href="https://github.com/Touwendez/localisation-multicapteurs-zoe-ros2-carla" target="_blank" rel="noopener">Voir le dépôt ↗</a>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="demo-item" id="demo-camera">
+        <div class="video-frame square">
+          <video controls preload="none" playsinline poster="media/camera_demo-poster.jpg">
+            <source src="media/camera_demo.mp4" type="video/mp4">
+            Votre navigateur ne peut pas lire la vidéo —
+            <a href="media/camera_demo.mp4">la télécharger</a>.
+          </video>
+        </div>
+        <figcaption>
+          <h3>Vision embarquée Raspberry Pi — détection de personnes</h3>
+          <p>
+            Détection de personnes en temps réel sur un flux caméra : acquisition,
+            pré-traitement OpenCV, inférence du modèle et overlay des détections,
+            exécuté en continu sur Raspberry Pi sous Linux.
+          </p>
+          <div class="proj-links">
+            <a href="#projects">↑ Voir le projet</a>
+            <a href="https://github.com/Touwendez/Projet-Vision-embarqu-e-sur-Raspberry-Pi-D-tection-de-personnes" target="_blank" rel="noopener">Voir le dépôt ↗</a>
           </div>
         </figcaption>
       </figure>

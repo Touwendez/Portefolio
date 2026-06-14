@@ -15,6 +15,8 @@ et un poster `.jpg` (image d'aperçu avant lecture).
 | `carla_ekf-poster.jpg` | poster CARLA/EKF | **en place** |
 | `carla_ekf_2.mp4` | localisation ROS2/CARLA — séquence complémentaire (paysage, 720p, ~1 Mo) | **en place** |
 | `carla_ekf_2-poster.jpg` | poster CARLA/EKF (séquence 2) | **en place** |
+| `camera_demo.mp4` | vision Raspberry Pi — détection de personnes (carré, 720p, ~0,9 Mo) | **en place** |
+| `camera_demo-poster.jpg` | poster vision Raspberry Pi | **en place** |
 
 Pour **remplacer** la vidéo plus tard, dépose une nouvelle source et recompresse-la
 avec la commande ci-dessous (en gardant le même nom de sortie), puis régénère le poster.
