@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Touwende Ouedraogo · Ingénieur Automaticien | Robotique & Perception</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0e14;
+    --panel: #111720;
+    --panel-2: #0d1218;
+    --border: #1e2935;
+    --border-soft: #161f29;
+    --text: #e6edf3;
+    --text-dim: #7e8c9a;
+    --text-faint: #4d5a68;
+    --mint: #5effb8;
+    --mint-dim: rgba(94,255,184,0.10);
+    --coral: #ff7a59;
+    --coral-dim: rgba(255,122,89,0.10);
+    --radius: 10px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(rgba(94,255,184,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(94,255,184,0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; position:relative; z-index:1; }
+
+  h1,h2,h3{ font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  a{ color:var(--mint); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,14,20,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .nav-id{ font-family:'Space Grotesk'; font-weight:600; font-size:16px; }
+  .nav-id span{ color:var(--mint); }
+  .nav-links{ display:flex; gap:28px; list-style:none; }
+  .nav-links a{ color:var(--text-dim); font-size:14px; font-family:'IBM Plex Mono'; transition:color .15s; }
+  .nav-links a:hover{ color:var(--mint); text-decoration:none; }
+  @media (max-width:760px){ .nav-links{ display:none; } }
+
+  /* ===== HERO ===== */
+  .hero{ padding:96px 0 80px; position:relative; overflow:hidden; }
+  .hero-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:center; }
+  @media (max-width:840px){ .hero-grid{ grid-template-columns:1fr; } }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono'; font-size:13px; color:var(--mint);
+    display:flex; align-items:center; gap:10px; margin-bottom:20px;
+  }
+  .eyebrow .dot{
+    width:8px; height:8px; border-radius:50%; background:var(--mint);
+    box-shadow:0 0 0 0 rgba(94,255,184,0.5);
+    animation:pulse 2s infinite;
+  }
+  @media (prefers-reduced-motion:no-preference){
+    @keyframes pulse{
+      0%{ box-shadow:0 0 0 0 rgba(94,255,184,0.45); }
+      70%{ box-shadow:0 0 0 8px rgba(94,255,184,0); }
+      100%{ box-shadow:0 0 0 0 rgba(94,255,184,0); }
+    }
+  }
+
+  .hero h1{ font-size:48px; line-height:1.1; margin-bottom:14px; }
+  .hero h1 .last{ color:var(--text-dim); }
+  .hero .role{ font-size:19px; color:var(--text); font-weight:500; margin-bottom:18px; }
+  .hero .role .accent{ color:var(--mint); }
+  .hero p.lead{ color:var(--text-dim); font-size:15px; max-width:540px; margin-bottom:28px; }
+
+  .cta-row{ display:flex; flex-wrap:wrap; gap:12px; }
+  .btn{
+    font-family:'IBM Plex Mono'; font-size:13px; padding:11px 18px;
+    border-radius:6px; border:1px solid var(--border); color:var(--text);
+    transition:all .15s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:hover{ border-color:var(--mint); color:var(--mint); text-decoration:none; }
+  .btn.primary{ background:var(--mint); color:#0a0e14; border-color:var(--mint); font-weight:500; }
+  .btn.primary:hover{ background:transparent; color:var(--mint); }
+
+  /* radar visual */
+  .radar{ position:relative; width:100%; max-width:340px; margin:0 auto; aspect-ratio:1/1; }
+  .radar svg{ width:100%; height:100%; }
+  .radar-ring{ fill:none; stroke:var(--border); stroke-width:1; }
+  .radar-sweep{ transform-origin:170px 170px; animation:spin 4s linear infinite; }
+  @media (prefers-reduced-motion:no-preference){
+    @keyframes spin{ to{ transform:rotate(360deg); } }
+  }
+  .radar-label{ font-family:'IBM Plex Mono'; font-size:11px; fill:var(--text-dim); }
+  .radar-blip{ fill:var(--mint); }
+  .radar-blip.coral{ fill:var(--coral); }
+
+  /* ===== SECTIONS ===== */
+  section{ padding:72px 0; border-top:1px solid var(--border-soft); }
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:36px; }
+  .sec-head .tag{ font-family:'IBM Plex Mono'; font-size:12px; color:var(--coral); white-space:nowrap; }
+  .sec-head h2{ font-size:28px; }
+  .sec-head::after{ content:""; flex:1; height:1px; background:var(--border-soft); }
+
+  /* ===== ABOUT ===== */
+  .about-grid{ display:grid; grid-template-columns:1.6fr 1fr; gap:40px; }
+  @media (max-width:760px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-grid p{ color:var(--text-dim); margin-bottom:14px; font-size:15px; }
+  .stat-list{ display:flex; flex-direction:column; gap:16px; }
+  .stat{
+    border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px;
+    background:var(--panel);
+  }
+  .stat .num{ font-family:'Space Grotesk'; font-size:26px; color:var(--mint); font-weight:600; }
+  .stat .label{ font-family:'IBM Plex Mono'; font-size:12px; color:var(--text-dim); margin-top:4px; }
+
+  /* ===== SKILLS ===== */
+  .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:18px; }
+  .skill-card{
+    border:1px solid var(--border); border-radius:var(--radius); padding:20px;
+    background:var(--panel);
+  }
+  .skill-card h3{ font-size:14px; color:var(--mint); font-family:'IBM Plex Mono'; font-weight:500; margin-bottom:12px; text-transform:uppercase; letter-spacing:.04em; }
+  .tag-list{ display:flex; flex-wrap:wrap; gap:6px; }
+  .pill{
+    font-family:'IBM Plex Mono'; font-size:12px; color:var(--text-dim);
+    border:1px solid var(--border-soft); border-radius:5px; padding:4px 9px;
+  }
+
+  /* ===== EXPERIENCE ===== */
+  .timeline{ display:flex; flex-direction:column; gap:0; }
+  .tl-item{
+    display:grid; grid-template-columns:160px 1fr; gap:28px;
+    padding:28px 0; border-top:1px solid var(--border-soft);
+  }
+  .tl-item:first-child{ border-top:none; padding-top:0; }
+  @media (max-width:640px){ .tl-item{ grid-template-columns:1fr; gap:8px; } }
+  .tl-date{ font-family:'IBM Plex Mono'; font-size:12px; color:var(--coral); white-space:nowrap; padding-top:3px; }
+  .tl-content h3{ font-size:18px; margin-bottom:2px; }
+  .tl-content .org{ color:var(--text-dim); font-size:14px; margin-bottom:12px; font-family:'IBM Plex Mono'; }
+  .tl-content ul{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .tl-content li{ color:var(--text-dim); font-size:14px; padding-left:18px; position:relative; }
+  .tl-content li::before{ content:"›"; position:absolute; left:0; color:var(--mint); }
+
+  /* ===== PROJECTS ===== */
+  .project{
+    border:1px solid var(--border); border-radius:var(--radius);
+    background:var(--panel); margin-bottom:28px; overflow:hidden;
+    position:relative;
+  }
+  /* corner-bracket viewfinder frame */
+  .project::before, .project::after,
+  .project .frame-br::before, .project .frame-br::after{
+    content:""; position:absolute; width:18px; height:18px; pointer-events:none;
+    border-color:var(--mint); opacity:.55;
+  }
+  .project::before{ top:10px; left:10px; border-top:2px solid; border-left:2px solid; }
+  .project::after{ top:10px; right:10px; border-top:2px solid; border-right:2px solid; }
+  .project .frame-br::before{ bottom:10px; left:10px; border-bottom:2px solid var(--mint); border-left:2px solid var(--mint); }
+  .project .frame-br::after{ bottom:10px; right:10px; border-bottom:2px solid var(--mint); border-right:2px solid var(--mint); }
+
+  .project-body{ display:grid; grid-template-columns:1fr 1.15fr; gap:0; }
+  @media (max-width:800px){ .project-body{ grid-template-columns:1fr; } }
+  .project-info{ padding:34px 32px; }
+  .project-diagram{ background:var(--panel-2); border-left:1px solid var(--border); display:flex; align-items:center; justify-content:center; padding:24px; }
+  @media (max-width:800px){ .project-diagram{ border-left:none; border-top:1px solid var(--border); } }
+
+  .proj-tag{ font-family:'IBM Plex Mono'; font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
+  .project-info h3{ font-size:21px; margin-bottom:10px; }
+  .project-info p{ color:var(--text-dim); font-size:14.5px; margin-bottom:14px; }
+  .badge{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono'; font-size:11px; color:var(--coral);
+    border:1px solid rgba(255,122,89,0.3); background:var(--coral-dim);
+    border-radius:5px; padding:5px 10px; margin-bottom:14px;
+  }
+  .stack-row{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+  .proj-links{ display:flex; gap:16px; font-family:'IBM Plex Mono'; font-size:13px; }
+  .proj-links a{ color:var(--text-dim); }
+  .proj-links a:hover{ color:var(--mint); }
+
+  /* svg diagram defaults */
+  .project-diagram svg{ width:100%; height:auto; }
+  .d-box{ fill:var(--panel); stroke:var(--border); stroke-width:1; rx:6; }
+  .d-box.accent{ stroke:var(--mint); }
+  .d-box.coral{ stroke:var(--coral); }
+  .d-text{ font-family:'IBM Plex Mono'; font-size:11px; fill:var(--text); }
+  .d-text-dim{ font-family:'IBM Plex Mono'; font-size:10px; fill:var(--text-dim); }
+  .d-arrow{ stroke:var(--text-faint); stroke-width:1.2; fill:none; marker-end:url(#arrowhead); }
+  .d-arrow.accent{ stroke:var(--mint); }
+
+  /* ===== OTHER PROJECTS ===== */
+  .other-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:14px; }
+  .other-card{
+    border:1px solid var(--border-soft); border-radius:8px; padding:16px 18px;
+    background:var(--panel); transition:border-color .15s;
+  }
+  .other-card:hover{ border-color:var(--mint); }
+  .other-card .ot-title{ font-size:14px; font-weight:500; margin-bottom:4px; }
+  .other-card .ot-desc{ font-size:12.5px; color:var(--text-dim); margin-bottom:8px; }
+  .other-card a{ font-family:'IBM Plex Mono'; font-size:11.5px; }
+  .group-label{ font-family:'IBM Plex Mono'; font-size:12px; color:var(--text-dim); margin:28px 0 14px; text-transform:uppercase; letter-spacing:.06em; }
+  .group-label:first-child{ margin-top:0; }
+
+  /* ===== EDUCATION ===== */
+  .edu-item{ border-left:2px solid var(--border); padding-left:22px; margin-bottom:28px; position:relative; }
+  .edu-item::before{ content:""; position:absolute; left:-5px; top:4px; width:8px; height:8px; border-radius:50%; background:var(--mint); }
+  .edu-item h3{ font-size:17px; margin-bottom:2px; }
+  .edu-item .org{ font-family:'IBM Plex Mono'; font-size:12px; color:var(--coral); margin-bottom:10px; }
+  .edu-item ul{ list-style:none; display:flex; flex-direction:column; gap:6px; }
+  .edu-item li{ color:var(--text-dim); font-size:14px; padding-left:18px; position:relative; }
+  .edu-item li::before{ content:"›"; position:absolute; left:0; color:var(--mint); }
+
+  /* ===== CONTACT / FOOTER ===== */
+  footer{ padding:64px 0 48px; border-top:1px solid var(--border-soft); }
+  .contact-grid{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; }
+  .contact-grid h2{ font-size:30px; max-width:480px; }
+  .contact-grid p{ color:var(--text-dim); margin-top:10px; font-size:14.5px; }
+  .contact-links{ display:flex; flex-direction:column; gap:10px; font-family:'IBM Plex Mono'; font-size:14px; align-items:flex-end; }
+  .contact-links a{ color:var(--text); }
+  .contact-links a:hover{ color:var(--mint); }
+  .foot-bottom{ margin-top:48px; padding-top:24px; border-top:1px solid var(--border-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-family:'IBM Plex Mono'; font-size:12px; color:var(--text-faint); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-id">TOUWENDE <span>OUEDRAOGO</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">Profil</a></li>
+      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#experience">Expériences</a></li>
+      <li><a href="#projects">Projets</a></li>
+      <li><a href="#education">Formation</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> RECHERCHE POSTE · DISPONIBLE IMMÉDIATEMENT</div>
+      <h1>Touwende<br><span class="last">Ouedraogo</span></h1>
+      <div class="role">Ingénieur Automaticien <span class="accent">/ Robotique &amp; Perception Multi-Capteurs</span></div>
+      <p class="lead">
+        Étudiant en M2 Systèmes, Machines Autonomes et Réseaux de Terrain à l'Université de Lille.
+        Spécialisé en fusion de capteurs (GNSS/INS, Lidar, Radar, Caméra), ROS2, vision embarquée
+        et systèmes industriels, du capteur jusqu'à la validation terrain.
+      </p>
+      <div class="cta-row">
+        <a class="btn primary" href="mailto:boulanger02t@gmail.com">Me contacter</a>
+        <a class="btn" href="https://github.com/Touwendez" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn" href="https://linkedin.com/in/touw-ouedraogo" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="radar">
+      <svg viewBox="0 0 340 340" role="img" aria-label="Visualisation radar stylisée représentant la fusion de capteurs">
+        <circle class="radar-ring" cx="170" cy="170" r="150"/>
+        <circle class="radar-ring" cx="170" cy="170" r="105"/>
+        <circle class="radar-ring" cx="170" cy="170" r="60"/>
+        <line class="radar-ring" x1="20" y1="170" x2="320" y2="170"/>
+        <line class="radar-ring" x1="170" y1="20" x2="170" y2="320"/>
+        <g class="radar-sweep">
+          <path d="M170 170 L170 20 A150 150 0 0 1 280 67 Z" fill="var(--mint)" opacity="0.08"/>
+          <line x1="170" y1="170" x2="170" y2="20" stroke="var(--mint)" stroke-width="1.5"/>
+        </g>
+        <circle class="radar-blip" cx="230" cy="100" r="4"/>
+        <text class="radar-label" x="240" y="98">LIDAR</text>
+        <circle class="radar-blip coral" cx="110" cy="230" r="4"/>
+        <text class="radar-label" x="120" y="234">RADAR</text>
+        <circle class="radar-blip" cx="245" cy="225" r="4"/>
+        <text class="radar-label" x="255" y="229">CAM</text>
+        <circle class="radar-blip coral" cx="95" cy="95" r="4"/>
+        <text class="radar-label" x="60" y="85">GNSS/INS</text>
+        <circle class="radar-blip" cx="170" cy="170" r="3" fill="var(--text)"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">// 01</span><h2>Profil</h2></div>
+    <div class="about-grid">
+      <div>
+        <p>
+          Formé à l'automatique, l'embarqué et la robotique (Master 1 Automatique et Systèmes Électriques,
+          Master 2 Systèmes, Machines Autonomes et Réseaux de Terrain, Université de Lille), je travaille
+          aujourd'hui sur des problématiques de perception multi-capteurs pour la conduite autonome,
+          dans le cadre d'un projet de fin d'études en cours.
+        </p>
+        <p>
+          À l'aise sous Linux avec ROS2, CARLA et Git/GitLab, je développe en Python et C++ des pipelines
+          de traitement de capteurs (GNSS, INS, Lidar, Radar, Caméra), des systèmes de vision embarquée
+          (OpenCV, TensorFlow, PyTorch) et des solutions sur microcontrôleurs (Raspberry Pi, ESP32, STM32, Arduino).
+          Mes stages en entreprise m'ont aussi confronté à l'automatisme industriel (Siemens TIA Portal),
+          la supervision et la mise au point sur ligne de production.
+        </p>
+        <p>
+          Je recherche un <strong style="color:var(--text)">poste d'ingénieur</strong> (automatique, robotique,
+          perception multi-capteurs ou systèmes embarqués), pour faire le lien entre développement logiciel et
+          terrain : intégration de capteurs, contrôle-commande, automatisation, tests et amélioration continue.
+        </p>
+      </div>
+      <div class="stat-list">
+        <div class="stat"><div class="num">2</div><div class="label">STAGES EN ENTREPRISE · AUTOMATISME &amp; VISION</div></div>
+        <div class="stat"><div class="num">5+</div><div class="label">PROJETS ROBOTIQUE / VISION / EMBARQUÉ</div></div>
+        <div class="stat"><div class="num">ROS2</div><div class="label">CARLA · PYTORCH · OPENCV · LINUX</div></div>
+        <div class="stat"><div class="num">B2</div><div class="label">ANGLAIS · DOCUMENTATION TECHNIQUE</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">// 02</span><h2>Compétences techniques</h2></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Robotique &amp; perception</h3>
+        <div class="tag-list">
+          <span class="pill">ROS2</span><span class="pill">Gazebo</span><span class="pill">CARLA</span>
+          <span class="pill">GNSS/INS</span><span class="pill">Lidar</span><span class="pill">Radar</span>
+          <span class="pill">Caméra</span><span class="pill">Fusion multi-capteurs</span><span class="pill">Linux</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Développement &amp; données</h3>
+        <div class="tag-list">
+          <span class="pill">Python</span><span class="pill">C++</span><span class="pill">C#</span>
+          <span class="pill">POO</span><span class="pill">Git / GitLab</span><span class="pill">SQL</span>
+          <span class="pill">PHP / MySQL</span><span class="pill">Excel / VBA</span><span class="pill">MQTT</span><span class="pill">Modbus</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Embarqué &amp; systèmes</h3>
+        <div class="tag-list">
+          <span class="pill">Raspberry Pi</span><span class="pill">STM32</span><span class="pill">ESP32</span>
+          <span class="pill">Arduino</span><span class="pill">CAN</span><span class="pill">Capteurs / actionneurs</span>
+          <span class="pill">Traçabilité QR code</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Vision &amp; IA embarquée</h3>
+        <div class="tag-list">
+          <span class="pill">OpenCV</span><span class="pill">TensorFlow</span><span class="pill">PyTorch</span>
+          <span class="pill">Jetson Nano</span><span class="pill">Détection d'objets</span><span class="pill">Fusion de modèles</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Automatisme, IHM &amp; supervision</h3>
+        <div class="tag-list">
+          <span class="pill">Siemens TIA Portal</span><span class="pill">PLCSIM</span><span class="pill">LADDER / FBD / SCL</span>
+          <span class="pill">SCADA / IHM</span><span class="pill">LabVIEW</span><span class="pill">MATLAB / Simulink</span><span class="pill">Factory I/O</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Tests &amp; validation terrain</h3>
+        <div class="tag-list">
+          <span class="pill">Mise en service</span><span class="pill">Diagnostic</span><span class="pill">Maintenance préventive</span>
+          <span class="pill">Simulation de pannes</span><span class="pill">Campagnes de tests</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">// 03</span><h2>Expériences professionnelles</h2></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date mono">06/2024 – 09/2024</div>
+        <div class="tl-content">
+          <h3>Stage ingénieur automaticien</h3>
+          <div class="org">Sounduct · Strasbourg</div>
+          <ul>
+            <li>Développement d'IHM Python connectées à l'ERP pour digitaliser et fiabiliser les opérations d'atelier.</li>
+            <li>Mise en place d'une traçabilité QR code (génération/lecture, suivi des flux), avec une réduction de 60 % des erreurs.</li>
+            <li>Vision embarquée sur Raspberry Pi pour détecter les bacs vides (88 % de réussite sur 200 tests) avec OpenCV et TensorFlow/PyTorch.</li>
+            <li>Intégration d'un pipeline Python de commande robot (cobot MyCobot) déclenchant l'action correctrice après détection.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date mono">06/2023 – 09/2023</div>
+        <div class="tl-content">
+          <h3>Stage technicien de maintenance</h3>
+          <div class="org">Groupe Lactalis · Livarot-Pays-d'Auge</div>
+          <ul>
+            <li>Simulation de pannes et scénarios de fonctionnement sous Factory I/O pour valider les automatismes de l'usine.</li>
+            <li>Réduction de 10 % des arrêts non planifiés et fiabilisation de la programmation des palettiseurs (automates Siemens).</li>
+            <li>Développement de séquences d'automatisme et de commande d'axes moteurs via TIA Portal / PLCSIM (LADDER, FBD, SCL).</li>
+            <li>Participation aux essais et à la mise au point sur ligne : mise en service, diagnostic, maintenance préventive.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">// 04</span><h2>Projets phares</h2></div>
+
+    <!-- PROJECT 1 : DriveSense -->
+    <div class="project">
+      <div class="frame-br"></div>
+      <div class="project-body">
+        <div class="project-info">
+          <div class="proj-tag">Projet de fin d'études · en cours, depuis 09/2025</div>
+          <h3>DriveSense : perception multi-capteurs pour véhicule autonome</h3>
+          <div class="badge">🔒 Projet en entreprise, détails confidentiels : présentation générale</div>
+          <p>
+            Conception et évaluation d'une architecture de <strong style="color:var(--text)">fusion radar / lidar / caméra</strong>
+            pour la détection d'objets en conduite autonome. Le système repose sur un module de
+            <em>gating</em> qui sélectionne dynamiquement les combinaisons de capteurs les plus pertinentes
+            selon le contexte (météo, scène urbaine, etc.), puis fusionne les détections retenues.
+            Travaux menés sur dataset de référence (scènes brouillard, pluie, nuit, ville) avec une
+            stratégie d'entraînement par phases et une évaluation comparative par capteur.
+          </p>
+          <div class="stack-row">
+            <span class="pill">Python</span><span class="pill">PyTorch</span><span class="pill">ResNet / FasterRCNN</span>
+            <span class="pill">ROS2</span><span class="pill">Fusion multi-capteurs</span><span class="pill">Linux / Git</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Touwendez" target="_blank" rel="noopener">Dépôts (sur demande) ↗</a>
+          </div>
+        </div>
+        <div class="project-diagram">
+          <svg viewBox="0 0 360 300" role="img" aria-label="Schéma de l'architecture de fusion multi-capteurs DriveSense">
+            <defs>
+              <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="var(--text-faint)" stroke-width="1.4"/>
+              </marker>
+            </defs>
+
+            <!-- capteurs -->
+            <rect class="d-box" x="24" y="34" width="90" height="32" rx="6"/>
+            <text class="d-text" x="69" y="50" text-anchor="middle" dominant-baseline="central">Caméra</text>
+            <rect class="d-box" x="24" y="78" width="90" height="32" rx="6"/>
+            <text class="d-text" x="69" y="94" text-anchor="middle" dominant-baseline="central">Radar</text>
+            <rect class="d-box" x="24" y="122" width="90" height="32" rx="6"/>
+            <text class="d-text" x="69" y="138" text-anchor="middle" dominant-baseline="central">Lidar</text>
+
+            <line class="d-arrow" x1="114" y1="50" x2="150" y2="84"/>
+            <line class="d-arrow" x1="114" y1="94" x2="150" y2="91"/>
+            <line class="d-arrow" x1="114" y1="138" x2="150" y2="100"/>
+
+            <!-- gating -->
+            <rect class="d-box accent" x="152" y="68" width="104" height="48" rx="6"/>
+            <text class="d-text" x="204" y="86" text-anchor="middle" dominant-baseline="central">Gating</text>
+            <text class="d-text-dim" x="204" y="103" text-anchor="middle" dominant-baseline="central">sélection top-K</text>
+
+            <line class="d-arrow accent" x1="204" y1="116" x2="204" y2="150"/>
+            <rect class="d-box" x="134" y="150" width="140" height="34" rx="6"/>
+            <text class="d-text" x="204" y="167" text-anchor="middle" dominant-baseline="central">Branches actives</text>
+
+            <line class="d-arrow accent" x1="204" y1="184" x2="204" y2="212"/>
+            <rect class="d-box accent" x="114" y="212" width="180" height="42" rx="6"/>
+            <text class="d-text" x="204" y="227" text-anchor="middle" dominant-baseline="central">Fusion finale</text>
+            <text class="d-text-dim" x="204" y="243" text-anchor="middle" dominant-baseline="central">Soft-NMS</text>
+
+            <text class="d-text-dim" x="24" y="284">Sortie : détections robustes — brouillard · pluie · nuit</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 : Localisation ROS2/CARLA -->
+    <div class="project">
+      <div class="frame-br"></div>
+      <div class="project-body">
+        <div class="project-info">
+          <div class="proj-tag">Projet académique M2 · depuis 09/2025</div>
+          <h3>Localisation multi-capteurs pour véhicule autonome (ROS2 / CARLA)</h3>
+          <p>
+            Évaluation et intégration de modules de localisation sur une <strong style="color:var(--text)">Renault Zoé robotisée</strong>
+            et son jumeau numérique CARLA. État de l'art des approches GNSS/INS, LiDAR-SLAM et VIO,
+            installation et calibration des modules sous ROS2 (réel + simulation), fusion multi-capteurs
+            (GNSS, IMU, Lidar) par filtre de Kalman étendu, et évaluation des performances : précision
+            de pose, latence, continuité, apport de chaque capteur.
+          </p>
+          <div class="stack-row">
+            <span class="pill">ROS2</span><span class="pill">CARLA</span><span class="pill">Python</span>
+            <span class="pill">EKF (robot_localization)</span><span class="pill">RViz</span><span class="pill">Linux</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Touwendez/localisation-multicapteurs-zoe-ros2-carla" target="_blank" rel="noopener">Voir le dépôt ↗</a>
+          </div>
+        </div>
+        <div class="project-diagram">
+          <svg viewBox="0 0 360 300" role="img" aria-label="Schéma du pipeline de localisation multi-capteurs ROS2 et CARLA">
+            <defs>
+              <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="var(--text-faint)" stroke-width="1.4"/>
+              </marker>
+            </defs>
+
+            <!-- capteurs -->
+            <rect class="d-box" x="20" y="26" width="104" height="32" rx="6"/>
+            <text class="d-text" x="72" y="42" text-anchor="middle" dominant-baseline="central">GNSS / INS</text>
+            <rect class="d-box" x="20" y="70" width="104" height="32" rx="6"/>
+            <text class="d-text" x="72" y="86" text-anchor="middle" dominant-baseline="central">Lidar</text>
+            <rect class="d-box" x="20" y="114" width="104" height="32" rx="6"/>
+            <text class="d-text" x="72" y="130" text-anchor="middle" dominant-baseline="central">IMU / encodeurs</text>
+
+            <line class="d-arrow" x1="124" y1="42" x2="160" y2="84"/>
+            <line class="d-arrow" x1="124" y1="86" x2="160" y2="84"/>
+            <line class="d-arrow" x1="124" y1="130" x2="160" y2="84"/>
+
+            <!-- traitement -->
+            <rect class="d-box accent" x="160" y="66" width="92" height="36" rx="6"/>
+            <text class="d-text" x="206" y="84" text-anchor="middle" dominant-baseline="central">Nœuds ROS2</text>
+
+            <line class="d-arrow accent" x1="252" y1="84" x2="282" y2="84"/>
+            <rect class="d-box coral" x="282" y="66" width="58" height="36" rx="6"/>
+            <text class="d-text" x="311" y="84" text-anchor="middle" dominant-baseline="central">EKF</text>
+
+            <line class="d-arrow accent" x1="311" y1="102" x2="311" y2="178"/>
+            <rect class="d-box" x="250" y="178" width="90" height="34" rx="6"/>
+            <text class="d-text" x="295" y="195" text-anchor="middle" dominant-baseline="central">Pose finale</text>
+
+            <!-- jumeau numérique -->
+            <rect x="20" y="172" width="196" height="74" rx="6" fill="none" stroke="var(--border)" stroke-dasharray="4 3"/>
+            <text class="d-text-dim" x="32" y="192">Jumeau numérique CARLA</text>
+            <text class="d-text-dim" x="32" y="209">Rejoue le scénario enregistré</text>
+            <text class="d-text-dim" x="32" y="226">Compare odométrie / EKF</text>
+
+            <line class="d-arrow" x1="216" y1="195" x2="250" y2="193"/>
+            <text class="d-text-dim" x="20" y="278">Évaluation : précision de pose · latence · continuité</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 : Vision Raspberry Pi -->
+    <div class="project">
+      <div class="frame-br"></div>
+      <div class="project-body">
+        <div class="project-info">
+          <div class="proj-tag">Projet académique M1 · 03/2025 – 05/2025</div>
+          <h3>Vision embarquée sur Raspberry Pi : détection de personnes en temps réel</h3>
+          <p>
+            Système de vision embarquée déployé sur Raspberry Pi pour la détection de personnes à partir
+            d'un flux caméra temps réel, dans une logique de sécurité et de traçabilité en environnement
+            industriel. Pipeline complet : acquisition vidéo, pré-traitement OpenCV, inférence via
+            TensorFlow/PyTorch, post-traitement (seuils, filtrage) et exécution continue sous Linux
+            avec supervision et relance automatique.
+          </p>
+          <div class="stack-row">
+            <span class="pill">Python</span><span class="pill">OpenCV</span><span class="pill">TensorFlow</span>
+            <span class="pill">PyTorch</span><span class="pill">Raspberry Pi</span><span class="pill">Linux</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Touwendez/Projet-Vision-embarqu-e-sur-Raspberry-Pi-D-tection-de-personnes" target="_blank" rel="noopener">Voir le dépôt ↗</a>
+          </div>
+        </div>
+        <div class="project-diagram">
+          <svg viewBox="0 0 360 260" role="img" aria-label="Schéma du pipeline de vision embarquée sur Raspberry Pi">
+            <defs>
+              <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="var(--text-faint)" stroke-width="1.4"/>
+              </marker>
+            </defs>
+
+            <!-- chaîne d'acquisition -->
+            <rect class="d-box" x="20" y="34" width="84" height="34" rx="6"/>
+            <text class="d-text" x="62" y="51" text-anchor="middle" dominant-baseline="central">Caméra</text>
+
+            <line class="d-arrow" x1="104" y1="51" x2="132" y2="51"/>
+            <rect class="d-box" x="132" y="34" width="96" height="34" rx="6"/>
+            <text class="d-text" x="180" y="51" text-anchor="middle" dominant-baseline="central">Pré-traitement</text>
+
+            <line class="d-arrow" x1="228" y1="51" x2="256" y2="51"/>
+            <rect class="d-box accent" x="256" y="34" width="84" height="34" rx="6"/>
+            <text class="d-text" x="298" y="51" text-anchor="middle" dominant-baseline="central">Inférence IA</text>
+
+            <path class="d-arrow accent" d="M298 68 L298 96 L200 96 L200 118"/>
+            <rect class="d-box" x="132" y="118" width="136" height="44" rx="6"/>
+            <text class="d-text" x="200" y="135" text-anchor="middle" dominant-baseline="central">Post-traitement</text>
+            <text class="d-text-dim" x="200" y="151" text-anchor="middle" dominant-baseline="central">+ overlay détections</text>
+
+            <line class="d-arrow" x1="200" y1="162" x2="200" y2="196"/>
+            <rect class="d-box coral" x="132" y="196" width="136" height="34" rx="6"/>
+            <text class="d-text" x="200" y="213" text-anchor="middle" dominant-baseline="central">Logs &amp; monitoring</text>
+
+            <text class="d-text-dim" x="20" y="252">↻ Exécution continue · relance automatique (Linux)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 4 : Robot ESP32 -->
+    <div class="project">
+      <div class="frame-br"></div>
+      <div class="project-body">
+        <div class="project-info">
+          <div class="proj-tag">Projet personnel · 05/2025</div>
+          <h3>Robot articulé en bois piloté en Wi-Fi (ESP32)</h3>
+          <p>
+            Conception, assemblage et pilotage d'un robot articulé en bois animé par des servomoteurs
+            et contrôlé en Wi-Fi depuis un smartphone via une interface directionnelle simple.
+            Mise en place de la commande PWM des servomoteurs sur ESP32, avec gestion de la sécurité :
+            limites d'angle, position neutre (home) et arrêt automatique en cas de perte de commande.
+          </p>
+          <div class="stack-row">
+            <span class="pill">ESP32</span><span class="pill">Arduino / C++</span><span class="pill">PWM servomoteurs</span>
+            <span class="pill">Wi-Fi</span><span class="pill">Conception mécanique</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Touwendez/Projet---Robot-articul-piloter-en-wifi-avec-ESP32" target="_blank" rel="noopener">Voir le dépôt ↗</a>
+          </div>
+        </div>
+        <div class="project-diagram">
+          <svg viewBox="0 0 360 230" role="img" aria-label="Schéma de la commande Wi-Fi du robot articulé ESP32">
+            <defs>
+              <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="var(--text-faint)" stroke-width="1.4"/>
+              </marker>
+            </defs>
+
+            <!-- commande -->
+            <rect class="d-box" x="20" y="34" width="92" height="34" rx="6"/>
+            <text class="d-text" x="66" y="51" text-anchor="middle" dominant-baseline="central">Smartphone</text>
+
+            <text class="d-text-dim" x="131" y="44" text-anchor="middle">Wi-Fi</text>
+            <line class="d-arrow" x1="112" y1="51" x2="150" y2="51"/>
+            <rect class="d-box accent" x="150" y="34" width="84" height="34" rx="6"/>
+            <text class="d-text" x="192" y="51" text-anchor="middle" dominant-baseline="central">ESP32</text>
+
+            <line class="d-arrow accent" x1="234" y1="51" x2="262" y2="51"/>
+            <rect class="d-box coral" x="262" y="34" width="84" height="34" rx="6"/>
+            <text class="d-text" x="304" y="51" text-anchor="middle" dominant-baseline="central">Servos PWM</text>
+
+            <line class="d-arrow" x1="192" y1="68" x2="120" y2="132"/>
+            <rect class="d-box" x="44" y="132" width="140" height="44" rx="6"/>
+            <text class="d-text" x="114" y="149" text-anchor="middle" dominant-baseline="central">Sécurité</text>
+            <text class="d-text-dim" x="114" y="165" text-anchor="middle" dominant-baseline="central">limites · home · timeout</text>
+
+            <line class="d-arrow" x1="304" y1="68" x2="280" y2="132"/>
+            <rect class="d-box" x="200" y="132" width="140" height="44" rx="6"/>
+            <text class="d-text" x="270" y="154" text-anchor="middle" dominant-baseline="central">Robot articulé</text>
+
+            <text class="d-text-dim" x="20" y="214">Arrêt automatique en cas de perte de commande</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== AUTRES PROJETS ===== -->
+<section id="other-projects">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">// 05</span><h2>Travaux complémentaires &amp; rapports techniques</h2></div>
+
+    <div class="group-label">Volets complémentaires : DriveSense</div>
+    <div class="other-grid">
+      <div class="other-card">
+        <div class="ot-title">Architecture HydraFusion</div>
+        <div class="ot-desc">Détail de l'architecture de fusion par sélection dynamique de branches.</div>
+        <a href="https://github.com/Touwendez/Hydrafusion2/blob/main/README_architecture.md" target="_blank" rel="noopener">Voir ↗</a>
+      </div>
+      <div class="other-card">
+        <div class="ot-title">Hydrafusion : architecture</div>
+        <div class="ot-desc">Variante d'architecture du pipeline de fusion multi-capteurs.</div>
+        <a href="https://github.com/Touwendez/Hydrafusion-architecture-/blob/main/README.md" target="_blank" rel="noopener">Voir ↗</a>
+      </div>
+      <div class="other-card">
+        <div class="ot-title">Knowledge Gate</div>
+        <div class="ot-desc">Module de gating basé sur des règles expertes (classification météo).</div>
+        <a href="https://github.com/Touwendez/Knowledge-gate/blob/main/README.md" target="_blank" rel="noopener">Voir ↗</a>
+      </div>
+      <div class="other-card">
+        <div class="ot-title">Évaluation Lidar (BEV)</div>
+        <div class="ot-desc">Rapport d'évaluation de la branche de détection Lidar en vue aérienne.</div>
+        <a href="https://github.com/Touwendez/LIDAR-evaluation/blob/main/rapport_eval_lidar_bev.md" target="_blank" rel="noopener">Voir ↗</a>
+      </div>
+      <div class="other-card">
+        <div class="ot-title">Évaluation Radar</div>
+        <div class="ot-desc">Rapport d'évaluation de la branche de détection Radar.</div>
+        <a href="https://github.com/Touwendez/RADAR-evaluation/blob/main/rapport_eval_r101_radar_8cls.md" target="_blank" rel="noopener">Voir ↗</a>
+      </div>
+      <div class="other-card">
+        <div class="ot-title">Évaluation des modèles de détection</div>
+        <div class="ot-desc">Comparaison des modèles de détection d'objets testés sur le projet.</div>
+        <a href="https://github.com/Touwendez/Evaluation-des-modeles-de-detection/blob/main/README.md" target="_blank" rel="noopener">Voir ↗</a>
+      </div>
+      <div class="other-card">
+        <div class="ot-title">Fusion multi-capteurs : évaluation expérimentale</div>
+        <div class="ot-desc">Campagne d'évaluation expérimentale de la fusion multi-capteurs.</div>
+        <a href="https://github.com/Touwendez/Evaluation-exp-rimentale-Fusion-multi-capteurs/blob/main/README.md" target="_blank" rel="noopener">Voir ↗</a>
+      </div>
+      <div class="other-card">
+        <div class="ot-title">Fusion multi-capteurs : évaluation (suite 2)</div>
+        <div class="ot-desc">Deuxième campagne d'évaluation expérimentale de la fusion multi-capteurs.</div>
+        <a href="https://github.com/Touwendez/Evaluation-exp-rimentale-Fusion-multi-capteurs-suite-2/blob/main/README.md" target="_blank" rel="noopener">Voir ↗</a>
+      </div>
+      <div class="other-card">
+        <div class="ot-title">Rapport radar / lidar</div>
+        <div class="ot-desc">Synthèse comparative des capteurs radar et lidar pour la perception.</div>
+        <a href="https://github.com/Touwendez/Rapport-radar-lidar-/blob/main/README.md" target="_blank" rel="noopener">Voir ↗</a>
+      </div>
+    </div>
+
+    <div class="group-label">Localisation &amp; supervision</div>
+    <div class="other-grid">
+      <div class="other-card">
+        <div class="ot-title">ROS2 Jazzy + CARLA : EKF / robot_localization</div>
+        <div class="ot-desc">Analyse offline et chaîne temps réel de localisation par EKF.</div>
+        <a href="https://github.com/Touwendez/ROS2-Jazzy-CARLA-EKF-robot_localization-analyse-offline-et-cha-ne-temps-r-el/blob/main/README.md" target="_blank" rel="noopener">Voir ↗</a>
+      </div>
+      <div class="other-card">
+        <div class="ot-title">Bureau d'études : supervision Excel/VBA</div>
+        <div class="ot-desc">Outil de supervision et de calculs développé sous Excel/VBA.</div>
+        <a href="https://github.com/Touwendez/bureau-etude-supervision-excel-vba/blob/main/README.md" target="_blank" rel="noopener">Voir ↗</a>
+      </div>
+      <div class="other-card">
+        <div class="ot-title">Rapport de projet</div>
+        <div class="ot-desc">Rapport détaillé associé à l'un des projets académiques.</div>
+        <a href="https://github.com/Touwendez/Rapport/blob/main/README.md" target="_blank" rel="noopener">Voir ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag">// 06</span><h2>Formation</h2></div>
+
+    <div class="edu-item">
+      <h3>Master 2 : Systèmes, Machines Autonomes et Réseaux de Terrain</h3>
+      <div class="org">Université de Lille · 07/2025 – 01/2026</div>
+      <ul>
+        <li>Programmation industrielle et embarquée : C++, C#, Python, POO, introduction au temps réel (RTOS).</li>
+        <li>Données et web industriel : modélisation relationnelle, SQL, PHP, MySQL, VBA, HTML, interfaces web.</li>
+        <li>Automatisme et supervision : automates programmables, SCADA, IHM, LabVIEW, MATLAB/Simulink.</li>
+        <li>Réseaux et IoT : MQTT, Modbus, Profibus, capteurs/actionneurs, Arduino, STM32, Raspberry Pi, ROS2.</li>
+      </ul>
+    </div>
+
+    <div class="edu-item">
+      <h3>Master 1 : Automatique et Systèmes Électriques (ASE)</h3>
+      <div class="org">Université de Lille · 07/2024 – 06/2025</div>
+      <ul>
+        <li>Électrotechnique et conversion d'énergie : machines électriques, convertisseurs de puissance, commande dynamique.</li>
+        <li>Automatique et commande : représentation d'état, identification, commande linéaire/numérique, régulation mono/multivariable.</li>
+        <li>Embarqué/temps réel et modélisation : microcontrôleurs, conception logicielle industrielle, signaux et réseaux d'énergie.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <h2>Disponible immédiatement pour un poste d'ingénieur.</h2>
+        <p>Robotique, perception multi-capteurs, systèmes embarqués &amp; automatisme, France et Europe.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:boulanger02t@gmail.com">boulanger02t@gmail.com</a>
+        <a href="tel:0753863493">07 53 86 34 93</a>
+        <a href="https://linkedin.com/in/touw-ouedraogo" target="_blank" rel="noopener">linkedin.com/in/touw-ouedraogo</a>
+        <a href="https://github.com/Touwendez" target="_blank" rel="noopener">github.com/Touwendez</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Touwende Ouedraogo</span>
+      <span>Portfolio : Ingénieur Automaticien / Robotique &amp; Perception Multi-Capteurs</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
