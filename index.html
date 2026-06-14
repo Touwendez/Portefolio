@@ -213,6 +213,21 @@
   .d-arrow{ stroke:var(--text-faint); stroke-width:1.2; fill:none; marker-end:url(#arrowhead); }
   .d-arrow.accent{ stroke:var(--mint); }
 
+  /* project demo media (photo / video) */
+  .project-media{
+    border-top:1px solid var(--border);
+    padding:24px 32px 30px; background:var(--panel-2);
+  }
+  .project-media .media-label{
+    font-family:'IBM Plex Mono'; font-size:11px; color:var(--text-faint);
+    text-transform:uppercase; letter-spacing:.08em; margin-bottom:12px;
+  }
+  .video-frame{
+    position:relative; max-width:640px; margin:0 auto;
+    border:1px solid var(--border); border-radius:8px; overflow:hidden; background:#000;
+  }
+  .video-frame video{ display:block; width:100%; height:auto; }
+
   /* ===== OTHER PROJECTS ===== */
   .other-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:14px; }
   .other-card{
@@ -689,6 +704,16 @@
 
             <text class="d-text-dim" x="20" y="214">Arrêt automatique en cas de perte de commande</text>
           </svg>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-label">Démo — pilotage Wi-Fi du robot</div>
+        <div class="video-frame">
+          <video controls preload="none" playsinline poster="media/robot-articule-poster.svg">
+            <source src="media/robot-articule-demo.mp4" type="video/mp4">
+            Votre navigateur ne peut pas lire la vidéo —
+            <a href="media/robot-articule-demo.mp4">la télécharger</a>.
+          </video>
         </div>
       </div>
     </div>
