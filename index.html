@@ -176,7 +176,7 @@
   .project{
     border:1px solid var(--border); border-radius:var(--radius);
     background:var(--panel); margin-bottom:28px; overflow:hidden;
-    position:relative;
+    position:relative; scroll-margin-top:80px;
   }
   /* corner-bracket viewfinder frame */
   .project::before, .project::after,
@@ -474,7 +474,7 @@
     <div class="sec-head"><span class="tag">// 04</span><h2>Projets phares</h2></div>
 
     <!-- PROJECT 1 : DriveSense -->
-    <div class="project">
+    <div class="project" id="proj-drivesense">
       <div class="frame-br"></div>
       <div class="project-body">
         <div class="project-info">
@@ -538,7 +538,7 @@
     </div>
 
     <!-- PROJECT 2 : Localisation ROS2/CARLA -->
-    <div class="project">
+    <div class="project" id="proj-localisation">
       <div class="frame-br"></div>
       <div class="project-body">
         <div class="project-info">
@@ -606,7 +606,7 @@
     </div>
 
     <!-- PROJECT 3 : Vision Raspberry Pi -->
-    <div class="project">
+    <div class="project" id="proj-vision">
       <div class="frame-br"></div>
       <div class="project-body">
         <div class="project-info">
@@ -664,7 +664,7 @@
     </div>
 
     <!-- PROJECT 4 : Robot ESP32 -->
-    <div class="project">
+    <div class="project" id="proj-robot">
       <div class="frame-br"></div>
       <div class="project-body">
         <div class="project-info">
@@ -745,7 +745,7 @@
             automatique en cas de perte de commande.
           </p>
           <div class="proj-links">
-            <a href="#projects">↑ Voir le projet</a>
+            <a href="#proj-robot">↑ Voir le projet</a>
             <a href="https://github.com/Touwendez/Projet---Robot-articul-piloter-en-wifi-avec-ESP32" target="_blank" rel="noopener">Voir le dépôt ↗</a>
           </div>
         </figcaption>
@@ -767,7 +767,7 @@
             fusionnée, visualisée sous RViz.
           </p>
           <div class="proj-links">
-            <a href="#projects">↑ Voir le projet</a>
+            <a href="#proj-localisation">↑ Voir le projet</a>
             <a href="https://github.com/Touwendez/localisation-multicapteurs-zoe-ros2-carla" target="_blank" rel="noopener">Voir le dépôt ↗</a>
           </div>
         </figcaption>
@@ -789,7 +789,7 @@
             numérique CARLA.
           </p>
           <div class="proj-links">
-            <a href="#projects">↑ Voir le projet</a>
+            <a href="#proj-localisation">↑ Voir le projet</a>
             <a href="https://github.com/Touwendez/localisation-multicapteurs-zoe-ros2-carla" target="_blank" rel="noopener">Voir le dépôt ↗</a>
           </div>
         </figcaption>
@@ -811,7 +811,7 @@
             exécuté en continu sur Raspberry Pi sous Linux.
           </p>
           <div class="proj-links">
-            <a href="#projects">↑ Voir le projet</a>
+            <a href="#proj-vision">↑ Voir le projet</a>
             <a href="https://github.com/Touwendez/Projet-Vision-embarqu-e-sur-Raspberry-Pi-D-tection-de-personnes" target="_blank" rel="noopener">Voir le dépôt ↗</a>
           </div>
         </figcaption>
