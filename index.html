@@ -120,7 +120,8 @@
   .radar-blip.coral{ fill:var(--coral); }
 
   /* ===== SECTIONS ===== */
-  section{ padding:72px 0; border-top:1px solid var(--border-soft); }
+  section{ padding:72px 0; border-top:1px solid var(--border-soft); scroll-margin-top:72px; }
+  footer{ scroll-margin-top:72px; }
   .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:36px; }
   .sec-head .tag{ font-family:'IBM Plex Mono'; font-size:12px; color:var(--coral); white-space:nowrap; }
   .sec-head h2{ font-size:28px; }
@@ -215,7 +216,7 @@
 
   /* ===== DEMOS ===== */
   .demo-grid{ display:flex; flex-direction:column; gap:40px; }
-  .demo-item{ display:grid; grid-template-columns:max-content 1fr; gap:32px; align-items:center; }
+  .demo-item{ display:grid; grid-template-columns:max-content 1fr; gap:32px; align-items:center; scroll-margin-top:84px; }
   @media (max-width:720px){ .demo-item{ grid-template-columns:1fr; gap:18px; } }
   .video-frame{
     position:relative; width:100%; margin:0;
@@ -546,7 +547,7 @@
             <span class="pill">EKF (robot_localization)</span><span class="pill">RViz</span><span class="pill">Linux</span>
           </div>
           <div class="proj-links">
-            <a href="#demos">Voir la démo ↗</a>
+            <a href="#demo-carla">Voir la démo ↗</a>
             <a href="https://github.com/Touwendez/localisation-multicapteurs-zoe-ros2-carla" target="_blank" rel="noopener">Voir le dépôt ↗</a>
           </div>
         </div>
@@ -670,7 +671,7 @@
             <span class="pill">Wi-Fi</span><span class="pill">Conception mécanique</span>
           </div>
           <div class="proj-links">
-            <a href="#demos">Voir la démo ↗</a>
+            <a href="#demo-robot">Voir la démo ↗</a>
             <a href="https://github.com/Touwendez/Projet---Robot-articul-piloter-en-wifi-avec-ESP32" target="_blank" rel="noopener">Voir le dépôt ↗</a>
           </div>
         </div>
@@ -718,7 +719,7 @@
   <div class="wrap">
     <div class="sec-head"><span class="tag">// 05</span><h2>Démos vidéo</h2></div>
     <div class="demo-grid">
-      <figure class="demo-item">
+      <figure class="demo-item" id="demo-robot">
         <div class="video-frame portrait">
           <video controls preload="none" playsinline poster="media/robot-articule-poster.jpg">
             <source src="media/robot-articule-demo.mp4" type="video/mp4">
@@ -740,7 +741,7 @@
         </figcaption>
       </figure>
 
-      <figure class="demo-item">
+      <figure class="demo-item" id="demo-carla">
         <div class="video-frame landscape">
           <video controls preload="none" playsinline poster="media/carla_ekf-poster.jpg">
             <source src="media/carla_ekf.mp4" type="video/mp4">
