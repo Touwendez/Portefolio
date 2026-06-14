@@ -8,11 +8,11 @@ La carte projet « Robot articulé » attend **deux fichiers** ici :
 
 | Fichier | Rôle | Statut |
 |---|---|---|
-| `robot-articule-demo.mp4` | la vidéo de démo | **à ajouter** |
-| `robot-articule-poster.svg` | l'image d'aperçu avant lecture | déjà présent (placeholder) |
+| `robot-articule-demo.mp4` | la vidéo de démo (720p, compressée, ~6 Mo) | **en place** |
+| `robot-articule-poster.jpg` | l'image d'aperçu avant lecture (extraite de la vidéo) | **en place** |
 
-Tant que le `.mp4` n'est pas là, le bloc affiche le poster « Vidéo à venir ».
-Dès que tu déposes le `.mp4` avec **ce nom exact**, la vidéo fonctionne sans rien changer au HTML.
+Pour **remplacer** la vidéo plus tard, dépose une nouvelle source et recompresse-la
+avec la commande ci-dessous (en gardant le même nom de sortie), puis régénère le poster.
 
 ### Préparer la vidéo (compression)
 
