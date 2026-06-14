@@ -214,13 +214,15 @@
   .d-arrow.accent{ stroke:var(--mint); }
 
   /* ===== DEMOS ===== */
-  .demo-grid{ display:flex; flex-direction:column; gap:32px; }
-  .demo-item{ display:grid; grid-template-columns:300px 1fr; gap:32px; align-items:center; }
+  .demo-grid{ display:flex; flex-direction:column; gap:40px; }
+  .demo-item{ display:grid; grid-template-columns:max-content 1fr; gap:32px; align-items:center; }
   @media (max-width:720px){ .demo-item{ grid-template-columns:1fr; gap:18px; } }
   .video-frame{
-    position:relative; max-width:300px; width:100%; margin:0;
+    position:relative; width:100%; margin:0;
     border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#000;
   }
+  .video-frame.portrait{ max-width:300px; }
+  .video-frame.landscape{ max-width:520px; }
   .video-frame video{ display:block; width:100%; height:auto; }
   .demo-item figcaption h3{ font-size:18px; margin-bottom:8px; }
   .demo-item figcaption p{ color:var(--text-dim); font-size:14.5px; margin-bottom:14px; }
@@ -544,6 +546,7 @@
             <span class="pill">EKF (robot_localization)</span><span class="pill">RViz</span><span class="pill">Linux</span>
           </div>
           <div class="proj-links">
+            <a href="#demos">Voir la démo ↗</a>
             <a href="https://github.com/Touwendez/localisation-multicapteurs-zoe-ros2-carla" target="_blank" rel="noopener">Voir le dépôt ↗</a>
           </div>
         </div>
@@ -716,7 +719,7 @@
     <div class="sec-head"><span class="tag">// 05</span><h2>Démos vidéo</h2></div>
     <div class="demo-grid">
       <figure class="demo-item">
-        <div class="video-frame">
+        <div class="video-frame portrait">
           <video controls preload="none" playsinline poster="media/robot-articule-poster.jpg">
             <source src="media/robot-articule-demo.mp4" type="video/mp4">
             Votre navigateur ne peut pas lire la vidéo —
@@ -733,6 +736,28 @@
           <div class="proj-links">
             <a href="#projects">↑ Voir le projet</a>
             <a href="https://github.com/Touwendez/Projet---Robot-articul-piloter-en-wifi-avec-ESP32" target="_blank" rel="noopener">Voir le dépôt ↗</a>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="demo-item">
+        <div class="video-frame landscape">
+          <video controls preload="none" playsinline poster="media/carla_ekf-poster.jpg">
+            <source src="media/carla_ekf.mp4" type="video/mp4">
+            Votre navigateur ne peut pas lire la vidéo —
+            <a href="media/carla_ekf.mp4">la télécharger</a>.
+          </video>
+        </div>
+        <figcaption>
+          <h3>Localisation multi-capteurs — fusion EKF (ROS2 / CARLA)</h3>
+          <p>
+            Fusion GNSS / IMU / Lidar par filtre de Kalman étendu sous ROS2, rejouée sur
+            le jumeau numérique CARLA : comparaison de l'odométrie brute et de la pose
+            fusionnée, visualisée sous RViz.
+          </p>
+          <div class="proj-links">
+            <a href="#projects">↑ Voir le projet</a>
+            <a href="https://github.com/Touwendez/localisation-multicapteurs-zoe-ros2-carla" target="_blank" rel="noopener">Voir le dépôt ↗</a>
           </div>
         </figcaption>
       </figure>

@@ -2,14 +2,17 @@
 
 Dossier des photos / vidéos de démonstration intégrées dans `index.html`.
 
-## Vidéo — Robot articulé (ESP32)
+## Vidéos de démo (section « Démos vidéo »)
 
-La carte projet « Robot articulé » attend **deux fichiers** ici :
+Chaque démo de `index.html` s'appuie sur deux fichiers : la vidéo `.mp4` (compressée)
+et un poster `.jpg` (image d'aperçu avant lecture).
 
 | Fichier | Rôle | Statut |
 |---|---|---|
-| `robot-articule-demo.mp4` | la vidéo de démo (720p, compressée, ~6 Mo) | **en place** |
-| `robot-articule-poster.jpg` | l'image d'aperçu avant lecture (extraite de la vidéo) | **en place** |
+| `robot-articule-demo.mp4` | démo robot articulé (portrait, 720p, ~6 Mo) | **en place** |
+| `robot-articule-poster.jpg` | poster du robot | **en place** |
+| `carla_ekf.mp4` | démo localisation ROS2/CARLA (paysage, 720p, ~3 Mo) | **en place** |
+| `carla_ekf-poster.jpg` | poster CARLA/EKF | **en place** |
 
 Pour **remplacer** la vidéo plus tard, dépose une nouvelle source et recompresse-la
 avec la commande ci-dessous (en gardant le même nom de sortie), puis régénère le poster.
