@@ -13,6 +13,8 @@ et un poster `.jpg` (image d'aperçu avant lecture).
 | `robot-articule-poster.jpg` | poster du robot | **en place** |
 | `carla_ekf.mp4` | démo localisation ROS2/CARLA (paysage, 720p, ~3 Mo) | **en place** |
 | `carla_ekf-poster.jpg` | poster CARLA/EKF | **en place** |
+| `carla_ekf_2.mp4` | localisation ROS2/CARLA — séquence complémentaire (paysage, 720p, ~1 Mo) | **en place** |
+| `carla_ekf_2-poster.jpg` | poster CARLA/EKF (séquence 2) | **en place** |
 
 Pour **remplacer** la vidéo plus tard, dépose une nouvelle source et recompresse-la
 avec la commande ci-dessous (en gardant le même nom de sortie), puis régénère le poster.
