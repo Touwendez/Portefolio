@@ -1,4 +1,4 @@
-# Portfolio — Touwende Ouedraogo
+# Portfolio  Touwende Ouedraogo
 
 Portfolio personnel d'un **ingénieur automaticien** spécialisé en robotique, perception
 multi-capteurs (GNSS/INS, Lidar, Radar, Caméra), vision embarquée et systèmes industriels.
