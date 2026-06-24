@@ -17,7 +17,7 @@ et un poster `.jpg` (image d'aperçu avant lecture).
 | `carla_ekf_2-poster.jpg` | poster CARLA/EKF (séquence 2) | **en place** |
 | `camera_demo.mp4` | vision Raspberry Pi — détection de personnes (carré, 720p, ~0,9 Mo) | **en place** |
 | `camera_demo-poster.jpg` | poster vision Raspberry Pi | **en place** |
-| `percepflow.mp4` | DriveSense — perception multi-capteurs (paysage, 720p, ~9 Mo) | **en place** |
+| `percepflow.mp4` | DriveSense : perception multi-capteurs (paysage, 720p, ~9 Mo) | **en place** |
 | `percepflow-poster.jpg` | poster DriveSense | **en place** |
 
 Pour **remplacer** la vidéo plus tard, dépose une nouvelle source et recompresse-la
