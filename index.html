@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Touwende Ouedraogo · Ingénieur Automaticien | Robotique & Perception</title>
+<title>Touwende Ouedraogo · Ingénieur R&D — Perception Multicapteurs & IA embarquée | ADAS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -293,7 +293,7 @@
     <div>
       <div class="eyebrow"><span class="dot"></span> RECHERCHE POSTE · DISPONIBLE À PARTIR DE 09/2026</div>
       <h1>Touwende<br><span class="last">Ouedraogo</span></h1>
-      <div class="role">Ingénieur Automaticien <span class="accent">/ Robotique &amp; Perception Multi-Capteurs</span></div>
+      <div class="role">Ingénieur R&amp;D <span class="accent">: Perception Multicapteurs &amp; IA embarquée | ADAS</span></div>
       <p class="lead">
         Étudiant en M2 Systèmes, Machines Autonomes et Réseaux de Terrain à l'Université de Lille.
         Spécialisé en fusion de capteurs (GNSS/INS, Lidar, Radar, Caméra), ROS2, vision embarquée
@@ -303,6 +303,7 @@
         <a class="btn primary" href="mailto:boulanger02t@gmail.com">Me contacter</a>
         <a class="btn" href="https://github.com/Touwendez" target="_blank" rel="noopener">GitHub ↗</a>
         <a class="btn" href="https://linkedin.com/in/touw-ouedraogo" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="mailto:boulanger02t@gmail.com">✉ boulanger02t@gmail.com</a>
       </div>
     </div>
     <div class="radar">
@@ -337,23 +338,18 @@
     <div class="about-grid">
       <div>
         <p>
-          Formé à l'automatique, l'embarqué et la robotique (Master 1 Automatique et Systèmes Électriques,
-          Master 2 Systèmes, Machines Autonomes et Réseaux de Terrain, Université de Lille), je travaille
-          aujourd'hui sur des problématiques de perception multi-capteurs pour la conduite autonome,
-          dans le cadre de mon stage de fin d'études chez Audensiel.
+          Formé à l'automatique, l'embarqué et la robotique (M2 SMART, Université de Lille), je travaille
+          sur des problématiques de perception multicapteurs pour la conduite autonome : entraînement de
+          modèles de détection, fusion sélective par attention apprise, évaluation sur données réelles
+          (RADIATE). Travaux orientés publication (<strong style="color:var(--text)">PercepFlow</strong>).
         </p>
         <p>
-          À l'aise sous Linux avec ROS2, CARLA et Git/GitLab, je développe en Python et C++ des pipelines
-          de traitement de capteurs (GNSS, INS, Lidar, Radar, Caméra), des systèmes de vision embarquée
-          (OpenCV, TensorFlow, PyTorch) et des solutions sur microcontrôleurs (Raspberry Pi, ESP32, STM32, Arduino).
-          Mes stages en entreprise m'ont aussi confronté à l'automatisme industriel (Siemens TIA Portal),
-          la supervision et la mise au point sur ligne de production.
+          Parallèlement, mes stages en entreprise m'ont confronté à l'automatisme industriel, la supervision
+          et la mise au point sur ligne de production.
         </p>
         <p>
-          À l'issue de mon stage de fin d'études (septembre 2026), je recherche un
-          <strong style="color:var(--text)">poste d'ingénieur</strong> (automatique, robotique,
-          perception multi-capteurs ou systèmes embarqués), pour faire le lien entre développement logiciel et
-          terrain : intégration de capteurs, contrôle-commande, automatisation, tests et amélioration continue.
+          <strong style="color:var(--text)">Disponible septembre 2026</strong> pour un poste d'ingénieur R&amp;D
+          ou une thèse en perception, ADAS ou systèmes embarqués.
         </p>
       </div>
       <div class="stat-list">
@@ -492,6 +488,11 @@
             Travaux menés sur dataset de référence (scènes brouillard, pluie, nuit, ville) avec une
             stratégie d'entraînement par phases et une évaluation comparative par capteur.
           </p>
+          <p>
+            <strong style="color:var(--mint)">Résultats : +21 points de mAP</strong> vs l'approche règles
+            expertes, évalué sur 22 séquences / 11 312 images annotées en conditions dégradées (brouillard,
+            pluie, neige, nuit). Travaux orientés publication.
+          </p>
           <div class="stack-row">
             <span class="pill">Python</span><span class="pill">PyTorch</span><span class="pill">ResNet / FasterRCNN</span>
             <span class="pill">ROS2</span><span class="pill">Fusion multi-capteurs</span><span class="pill">Linux / Git</span>
@@ -547,13 +548,13 @@
       <div class="project-body">
         <div class="project-info">
           <div class="proj-tag">Projet académique M2 · depuis 09/2025</div>
-          <h3>Localisation multi-capteurs pour véhicule autonome (ROS2 / CARLA)</h3>
+          <h3>Localisation multi-capteurs pour véhicule autonome (EKF · ROS2 · CARLA)</h3>
           <p>
             Évaluation et intégration de modules de localisation sur une <strong style="color:var(--text)">Renault Zoé robotisée</strong>
             et son jumeau numérique CARLA. État de l'art des approches GNSS/INS, LiDAR-SLAM et VIO,
-            installation et calibration des modules sous ROS2 (réel + simulation), fusion multi-capteurs
-            (GNSS, IMU, Lidar) par filtre de Kalman étendu, et évaluation des performances : précision
-            de pose, latence, continuité, apport de chaque capteur.
+            installation et calibration des modules sous ROS2 (réel + simulation). Fusion multi-capteurs
+            sur Zoé robotisée par <strong style="color:var(--text)">EKF (robot_localization)</strong> :
+            GNSS, INS, Lidar, caméra ; évaluation précision de pose, latence, continuité.
           </p>
           <div class="stack-row">
             <span class="pill">ROS2</span><span class="pill">CARLA</span><span class="pill">Python</span>
@@ -855,7 +856,7 @@
     <div class="other-grid">
       <div class="other-card">
         <div class="ot-title">Architecture HydraFusion</div>
-        <div class="ot-desc">Détail de l'architecture de fusion par sélection dynamique de branches.</div>
+        <div class="ot-desc">Architecture de référence pour la fusion sélective par gating ; base méthodologique de PercepFlow.</div>
         <a href="https://github.com/Touwendez/Hydrafusion2/blob/main/README_architecture.md" target="_blank" rel="noopener">Voir ↗</a>
       </div>
       <div class="other-card">
@@ -865,17 +866,17 @@
       </div>
       <div class="other-card">
         <div class="ot-title">Knowledge Gate</div>
-        <div class="ot-desc">Module de gating basé sur des règles expertes (classification météo).</div>
+        <div class="ot-desc">Module de gating basé sur classification météo (WeatherCNN, accuracy 97 %) et règles expertes de sélection des capteurs.</div>
         <a href="https://github.com/Touwendez/Knowledge-gate/blob/main/README.md" target="_blank" rel="noopener">Voir ↗</a>
       </div>
       <div class="other-card">
         <div class="ot-title">Évaluation Lidar (BEV)</div>
-        <div class="ot-desc">Rapport d'évaluation de la branche de détection Lidar en vue aérienne.</div>
+        <div class="ot-desc">Évaluation du détecteur LiDAR BEV (Faster R-CNN R50-FPN, Velodyne HDL-32E) par condition météo ; réentraîné sur données RADIATE.</div>
         <a href="https://github.com/Touwendez/LIDAR-evaluation/blob/main/rapport_eval_lidar_bev.md" target="_blank" rel="noopener">Voir ↗</a>
       </div>
       <div class="other-card">
         <div class="ot-title">Évaluation Radar</div>
-        <div class="ot-desc">Rapport d'évaluation de la branche de détection Radar.</div>
+        <div class="ot-desc">Analyse des performances du détecteur Faster R-CNN R101 sur données radar Navtech CTS350-X (8 classes, toutes conditions météo) ; métriques AP, F1, précision/rappel.</div>
         <a href="https://github.com/Touwendez/RADAR-evaluation/blob/main/rapport_eval_r101_radar_8cls.md" target="_blank" rel="noopener">Voir ↗</a>
       </div>
       <div class="other-card">
@@ -885,7 +886,7 @@
       </div>
       <div class="other-card">
         <div class="ot-title">Fusion multi-capteurs : évaluation expérimentale</div>
-        <div class="ot-desc">Campagne d'évaluation expérimentale de la fusion multi-capteurs.</div>
+        <div class="ot-desc">Campagne d'évaluation comparative des stratégies de fusion (KBG vs Attention Gating) sur 22 séquences de test.</div>
         <a href="https://github.com/Touwendez/Evaluation-exp-rimentale-Fusion-multi-capteurs/blob/main/README.md" target="_blank" rel="noopener">Voir ↗</a>
       </div>
       <div class="other-card">
@@ -929,7 +930,7 @@
 
     <div class="edu-item">
       <h3>Master 2 : Systèmes, Machines Autonomes et Réseaux de Terrain</h3>
-      <div class="org">Université de Lille · 07/2025 – 01/2026</div>
+      <div class="org">Université de Lille · 07/2025 – 09/2026</div>
       <ul>
         <li>Programmation industrielle et embarquée : C++, C#, Python, POO, introduction au temps réel (RTOS).</li>
         <li>Données et web industriel : modélisation relationnelle, SQL, PHP, MySQL, VBA, HTML, interfaces web.</li>
@@ -955,8 +956,8 @@
   <div class="wrap">
     <div class="contact-grid">
       <div>
-        <h2>Disponible à partir de septembre 2026 pour un poste d'ingénieur.</h2>
-        <p>Robotique, perception multi-capteurs, systèmes embarqués &amp; automatisme, France et Europe.</p>
+        <h2>Disponible à partir de septembre 2026 pour un poste d'ingénieur ou une thèse en perception, robotique ou systèmes embarqués.</h2>
+        <p>France et Europe.</p>
       </div>
       <div class="contact-links">
         <a href="mailto:boulanger02t@gmail.com">boulanger02t@gmail.com</a>
@@ -967,7 +968,7 @@
     </div>
     <div class="foot-bottom">
       <span>© 2026 Touwende Ouedraogo</span>
-      <span>Portfolio : Ingénieur Automaticien / Robotique &amp; Perception Multi-Capteurs</span>
+      <span>Portfolio : Ingénieur R&amp;D — Perception Multicapteurs &amp; IA embarquée | ADAS</span>
     </div>
   </div>
 </footer>

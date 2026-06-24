@@ -3,7 +3,7 @@
 Portfolio personnel d'un **ingénieur automaticien** spécialisé en robotique, perception
 multi-capteurs (GNSS/INS, Lidar, Radar, Caméra), vision embarquée et systèmes industriels.
 
-🔗 **Site en ligne** : https://touwendez.github.io/Portefolio/
+🔗 **Site en ligne** : https://touwendez.github.io/Portfolio/
 
 ## Aperçu
 
