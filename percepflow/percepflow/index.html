@@ -1,0 +1,133 @@
+STAGE R&D | AUDENSIEL INNOVATION | 2026
+PercepFlow
+Fusion sélective radar, LiDAR et caméra pour la détection d'objets en conduite autonome, avec sélection dynamique des branches par Attention Gating.
+Radar
+LiDAR
+Caméra
+PyTorch
+Faster R-CNN
+RADIATE
+Attention Gating
+Bird's-Eye View
+Contexte
+Démarche
+Architecture
+Résultats
+Démonstrateur
+Limites
+Ressources
+Pourquoi une fusion sélective ?
+PercepFlow a été développé dans le cadre du projet de recherche DriveSense d'Audensiel Innovation. Le projet cherche à rendre la perception plus robuste lorsque les conditions de conduite dégradent une partie des capteurs.
+La caméra, le radar et le LiDAR n'échouent pas dans les mêmes situations. L'idée centrale consiste donc à sélectionner les branches réellement utiles pour la scène courante, plutôt qu'à fusionner systématiquement toutes les sources disponibles.
+Contribution du stage
+Passage à des données réelles RADIATE, synchronisation des modalités, évaluation monomodale, projection caméra en BEV, Knowledge Based Gating, PercepFlow avec Attention Gating, entraînement, évaluation et démonstrateur.
+36,02 %
+mAP@0,50 finale
+60,30 %
+F1 final
+7
+branches de détection
+Démarche
+Synchroniser les capteurs
+Le radar sert de référence temporelle. Les acquisitions caméra et LiDAR les plus proches sont retrouvées à partir des timestamps du SDK RADIATE.
+Mesurer chaque modalité
+Les détecteurs radar, caméra et LiDAR sont évalués séparément pour identifier leurs domaines de validité.
+Mettre la caméra dans le même espace
+Quatre approches sont testées. Lift, Splat, Shoot est retenu pour projeter les caractéristiques caméra en vue de dessus.
+Construire une première sélection par règles
+WeatherCNN prédit le contexte météorologique, puis un ensemble de règles choisit les branches à favoriser.
+Passer à une sélection apprise
+PercepFlow remplace les règles par un Attention Gating qui apprend directement à noter les sept branches.
+Évaluer et rendre le système observable
+Les performances sont mesurées quantitativement et une interface web locale permet d'inspecter les capteurs, les scores du gate et la fusion.
+Architecture PercepFlow
+￼
+Architecture générale de PercepFlow extraite du rapport de stage.
+Les trois modalités produisent des caractéristiques homogènes. Le module d'Attention Gating calcule sept scores, conserve les trois branches les mieux notées, puis les détections sont fusionnées par Soft-NMS.
+Capteurs RADIATE
+Modalité
+Capteur
+Représentation
+Radar
+Navtech CTS350-X
+BEV native 1152 x 1152
+LiDAR
+Velodyne HDL-32E
+Nuage de points projeté en BEV
+Caméra
+ZED stéréo
+Perspective puis projection BEV par Lift, Splat, Shoot
+Détecteurs monomodaux
+Modalité
+mAP@0,50
+Précision
+Rappel
+F1
+Radar
+32,36 %
+57,73 %
+65,92 %
+61,56 %
+Caméra
+28,84 %
+39,93 %
+63,19 %
+52,76 %
+LiDAR BEV
+15,44 %
+43,94 %
+21,66 %
+29,02 %
+Ces valeurs servent à caractériser les modalités. Les protocoles des détecteurs monomodaux diffèrent du protocole final de PercepFlow.
+Résultats
+￼
+Performances globales sur l'ensemble de test final.
+Méthode
+mAP
+Précision
+Rappel
+F1
+Knowledge Based Gating
+29,01 %
+23,98 %
+64,11 %
+34,91 %
+PercepFlow
+36,02 %
+57,80 %
+63,10 %
+60,30 %
+Les deux méthodes retrouvent une proportion proche d'objets, mais la sélection apprise réduit fortement les fausses détections. Le gain principal se situe donc sur la précision.
+Comportement appris par le gate
+La branche radar seule est absente en conditions claires, puis apparaît davantage lorsque la visibilité se dégrade : 6 % sous la pluie, 8 % dans le brouillard, 10 % de nuit et 18 % sous la neige. Le module retrouve donc une hiérarchie de fiabilité sans recevoir de règle météorologique explicite.
+￼
+Analyse qualitative sur des scènes normales, pluvieuses et enneigées.
+Démonstrateur
+L'interface locale permet de comparer les trois capteurs, d'observer les scores attribués aux sept branches et de visualiser le résultat fusionné.
+￼
+Sur cette scène de brouillard, le radar conserve l'information utile et permet à la fusion de récupérer un véhicule non détecté par la caméra seule.
+Frontend
+HTML, CSS, JavaScript
+Backend
+Python, Flask, HTTP, JSON
+Modèle
+PyTorch, Torchvision, CUDA si disponible
+Traitement
+OpenCV, NumPy, SDK RADIATE
+Limites et suites possibles
+Classes rares
+La mAP moyenne atteint 52,96 % pour les classes véhicules, contre 19,09 % pour les classes rares.
+Budget d'entraînement
+Les ressources disponibles ont limité la durée d'apprentissage, notamment pour la projection caméra.
+Ablation
+Les essais s'arrêtent à trois branches actives. La valeur optimale de k reste donc à déterminer.
+Généralisation
+Les conclusions restent liées à RADIATE et à sa configuration de capteurs.
+Perspectives
+Poursuivre l'entraînement de la caméra BEV, mieux équilibrer les classes rares, tester davantage de valeurs de k, combiner contexte météorologique et sélection apprise, et mesurer la latence sur une cible matérielle.
+Ressources associées
+Évaluation des modèles
+LiDAR BEV
+HydraFusion
+Vidéo sur le portfolio
+Touwende OUEDRAOGO | Master 2 SMaRT, Université de Lille | Stage de fin d'études chez Audensiel Innovation
