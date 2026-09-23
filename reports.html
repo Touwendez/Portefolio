@@ -70,6 +70,34 @@
     margin-top:18px; padding:14px 16px; border-left:2px solid var(--coral);
     background:var(--panel-2); color:var(--text-dim); font-size:13px;
   }
+  .resource-heading{ font-size:20px; margin-bottom:8px; }
+  .resource-intro{ color:var(--text-dim); font-size:14.5px; margin-bottom:20px; max-width:780px; }
+  .references-details{ border:1px solid var(--border); border-radius:var(--radius); background:var(--panel-2); overflow:hidden; }
+  .references-details summary{
+    padding:16px 18px; color:var(--mint); cursor:pointer; list-style-position:inside;
+    font:500 13px 'IBM Plex Mono',monospace;
+  }
+  .references-details[open] summary{ border-bottom:1px solid var(--border); }
+  .scientific-list{ display:grid; gap:10px; padding:18px; list-style:none; counter-reset:reference; }
+  .scientific-list li{
+    counter-increment:reference; position:relative; padding:15px 18px 15px 58px;
+    border:1px solid var(--border-soft); border-radius:8px; background:var(--panel);
+    color:var(--text-dim); font-size:13.5px;
+  }
+  .scientific-list li::before{
+    content:"[" counter(reference) "]"; position:absolute; left:17px; top:15px;
+    color:var(--coral); font:12px 'IBM Plex Mono',monospace;
+  }
+  .scientific-list .architecture-ref{ border-color:rgba(94,255,184,.34); background:rgba(94,255,184,.035); }
+  .scientific-list .architecture-ref::after{
+    content:"architecture"; display:inline-block; margin-left:8px; padding:2px 6px;
+    border:1px solid rgba(94,255,184,.28); border-radius:4px; color:var(--mint);
+    font:10px 'IBM Plex Mono',monospace; vertical-align:1px;
+  }
+  .scientific-list .authors{ color:var(--text); }
+  .scientific-list cite{ font-style:normal; }
+  .scientific-list cite a{ color:var(--mint); }
+  .technical-resources{ margin-top:38px; }
   .reference-list{ display:grid; gap:12px; list-style:none; }
   .reference-list li{ padding:16px 18px; border:1px solid var(--border-soft); border-radius:8px; background:var(--panel); color:var(--text-dim); font-size:14px; }
   .reference-list strong{ color:var(--text); }
@@ -82,6 +110,9 @@
     h1{ font-size:34px; }
     .report-card{ grid-template-columns:1fr; padding:22px; }
     .actions{ min-width:0; }
+    .scientific-list{ padding:12px; }
+    .scientific-list li{ padding:14px 14px 14px 50px; font-size:13px; overflow-wrap:anywhere; }
+    .scientific-list li::before{ left:13px; top:14px; }
   }
   @media (max-width:480px){
     .wrap{ padding-left:20px; padding-right:20px; }
@@ -144,7 +175,7 @@
       <div class="sec-head"><span class="tag">// 02</span><h2>Localisation multi-capteurs</h2></div>
       <article class="report-card">
         <div>
-          <h3>Localisation pour véhicule autonome — EKF, ROS2 et CARLA</h3>
+          <h3>Localisation pour véhicule autonome - EKF, ROS2 et CARLA</h3>
           <p>Documentation technique du projet : état de l'art GNSS/INS, LiDAR-SLAM et VIO, intégration sous ROS2, simulation CARLA et fusion par filtre de Kalman étendu.</p>
           <div class="meta">
             <span class="pill">ROS2</span>
@@ -164,12 +195,49 @@
   <section id="bibliographie">
     <div class="wrap">
       <div class="sec-head"><span class="tag">// 03</span><h2>Bibliographie et ressources</h2></div>
-      <ul class="reference-list">
-        <li><strong>PercepFlow.</strong> Rapport public de stage : fusion sélective multicapteurs pour la perception robuste en conduite autonome.</li>
-        <li><strong>RADIATE.</strong> Dataset radar automobile en conditions météorologiques dégradées, utilisé pour l'évaluation expérimentale.</li>
-        <li><strong>ROS 2 — robot_localization.</strong> Ressources techniques relatives à la fusion d'état par EKF pour la localisation.</li>
-        <li><strong>CARLA.</strong> Simulateur open source utilisé pour l'intégration et la validation du pipeline de localisation.</li>
-      </ul>
+      <h3 class="resource-heading">Références scientifiques utilisées dans le rapport PercepFlow</h3>
+      <p class="resource-intro">Bibliographie du rapport public, reproduite dans l'ordre original. Les références mises en évidence interviennent directement dans l'architecture, ses détecteurs, ses mécanismes de fusion ou son protocole d'évaluation.</p>
+
+      <details class="references-details">
+        <summary>Afficher les 25 références</summary>
+        <ol class="scientific-list">
+          <li><span class="authors">Audensiel Innovation.</span> <cite>DriveSense : Système de perception avancé pour la conduite autonome.</cite> Rapport technique, 2024.</li>
+          <li><span class="authors">Nadeen Abu-Alrub et Nathir A. Rawashdeh.</span> <cite>Compact CNN-based road weather condition detection by grayscale image band for ADAS.</cite> SPIE Autonomous Systems: Sensors, Processing and Security, 2022.</li>
+          <li class="architecture-ref"><span class="authors">Navaneeth Bodla, Bharat Singh, Rama Chellappa et Larry S. Davis.</span> <cite><a href="https://openaccess.thecvf.com/content_iccv_2017/html/Bodla_Soft-NMS_--_Improving_ICCV_2017_paper.html" target="_blank" rel="noopener">Soft-NMS: Improving object detection with one line of code.</a></cite> IEEE International Conference on Computer Vision, 2017.</li>
+          <li><span class="authors">Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexander Kirillov et Sergey Zagoruyko.</span> <cite><a href="https://doi.org/10.1007/978-3-030-58452-8_13" target="_blank" rel="noopener">End-to-end object detection with transformers.</a></cite> European Conference on Computer Vision, 2020.</li>
+          <li><span class="authors">Shao-Yu Chu et Ming-Sui Lee.</span> <cite>MT-DETR: Robust end-to-end multimodal detection with confidence fusion.</cite> IEEE/CVF Winter Conference on Applications of Computer Vision, 2023.</li>
+          <li><span class="authors">Navneet Dalal et Bill Triggs.</span> <cite><a href="https://doi.org/10.1109/CVPR.2005.177" target="_blank" rel="noopener">Histograms of oriented gradients for human detection.</a></cite> IEEE Conference on Computer Vision and Pattern Recognition, 2005.</li>
+          <li><span class="authors">Yinpeng Dong, Caixin Kang, Jinlai Zhang, Zijian Zhu, Yikai Wang, Xiao Yang, Hang Su, Xingxing Wei et Jun Zhu.</span> <cite><a href="https://openaccess.thecvf.com/content/CVPR2023/html/Dong_Benchmarking_Robustness_of_3D_Object_Detection_to_Common_Corruptions_CVPR_2023_paper.html" target="_blank" rel="noopener">Benchmarking robustness of 3D object detection to common corruptions in autonomous driving.</a></cite> IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2023.</li>
+          <li><span class="authors">Pedro F. Felzenszwalb, Ross B. Girshick, David McAllester et Deva Ramanan.</span> <cite><a href="https://doi.org/10.1109/TPAMI.2009.167" target="_blank" rel="noopener">Object detection with discriminatively trained part-based models.</a></cite> IEEE Transactions on Pattern Analysis and Machine Intelligence, 32(9), 2010.</li>
+          <li><span class="authors">Ross Girshick.</span> <cite><a href="https://openaccess.thecvf.com/content_iccv_2015/html/Girshick_Fast_R-CNN_ICCV_2015_paper.html" target="_blank" rel="noopener">Fast R-CNN.</a></cite> IEEE International Conference on Computer Vision, 2015.</li>
+          <li><span class="authors">Ross Girshick, Jeff Donahue, Trevor Darrell et Jitendra Malik.</span> <cite><a href="https://openaccess.thecvf.com/content_cvpr_2014/html/Girshick_Rich_Feature_Hierarchies_2014_CVPR_paper.html" target="_blank" rel="noopener">Rich feature hierarchies for accurate object detection and semantic segmentation.</a></cite> IEEE Conference on Computer Vision and Pattern Recognition, 2014.</li>
+          <li><span class="authors">Xiaoshuai Hao, Guanqun Liu, Yuting Zhao, Yuheng Ji, Mengchuan Wei, Haimei Zhao, Lingdong Kong, Rong Yin et Yu Liu.</span> <cite><a href="https://arxiv.org/abs/2501.01037" target="_blank" rel="noopener">MSC-Bench: Benchmarking and analyzing multi-sensor corruption for driving perception.</a></cite> arXiv:2501.01037, 2025.</li>
+          <li><span class="authors">Kaiming He, Xiangyu Zhang, Shaoqing Ren et Jian Sun.</span> <cite><a href="https://doi.org/10.1007/978-3-319-10578-9_23" target="_blank" rel="noopener">Spatial pyramid pooling in deep convolutional networks for visual recognition.</a></cite> European Conference on Computer Vision, 2014.</li>
+          <li class="architecture-ref"><span class="authors">Kaiming He, Xiangyu Zhang, Shaoqing Ren et Jian Sun.</span> <cite><a href="https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html" target="_blank" rel="noopener">Deep residual learning for image recognition.</a></cite> IEEE Conference on Computer Vision and Pattern Recognition, 2016.</li>
+          <li class="architecture-ref"><span class="authors">Haowen Lai, Peng Yin et Sebastian Scherer.</span> <cite><a href="https://arxiv.org/abs/2111.11739" target="_blank" rel="noopener">AdaFusion: Visual-LiDAR fusion with adaptive weights for place recognition.</a></cite> IEEE Robotics and Automation Letters, 7(4), 2022.</li>
+          <li class="architecture-ref"><span class="authors">Zhiqi Li, Wenhai Wang, Hongyang Li, Enze Xie, Chonghao Sima, Tong Lu, Yu Qiao et Jifeng Dai.</span> <cite><a href="https://arxiv.org/abs/2203.17270" target="_blank" rel="noopener">BEVFormer: Learning bird's-eye-view representation from multi-camera images via spatiotemporal transformers.</a></cite> European Conference on Computer Vision, 2022.</li>
+          <li class="architecture-ref"><span class="authors">Arnav Vaibhav Malawade, Trier Mortlock et Mohammad Abdullah Al Faruque.</span> <cite><a href="https://arxiv.org/abs/2202.11330" target="_blank" rel="noopener">EcoFusion: Energy-aware adaptive sensor fusion for efficient autonomous vehicle perception.</a></cite> ACM/IEEE Design Automation Conference, 2022.</li>
+          <li class="architecture-ref"><span class="authors">Arnav Vaibhav Malawade, Trier Mortlock et Mohammad Abdullah Al Faruque.</span> <cite><a href="https://arxiv.org/abs/2201.06644" target="_blank" rel="noopener">HydraFusion: Context-aware selective sensor fusion for robust and efficient autonomous vehicle perception.</a></cite> ACM/IEEE International Conference on Cyber-Physical Systems, 2022.</li>
+          <li><span class="authors">Dong-Hee Paek et Seung-Hyun Kong.</span> <cite><a href="https://arxiv.org/abs/2503.07029" target="_blank" rel="noopener">Availability-aware sensor fusion via unified canonical space.</a></cite> arXiv:2503.07029, 2025.</li>
+          <li class="architecture-ref"><span class="authors">Jonah Philion et Sanja Fidler.</span> <cite><a href="https://arxiv.org/abs/2008.05711" target="_blank" rel="noopener">Lift, Splat, Shoot: Encoding images from arbitrary camera rigs by implicitly unprojecting to 3D.</a></cite> arXiv:2008.05711, 2020.</li>
+          <li class="architecture-ref"><span class="authors">Shaoqing Ren, Kaiming He, Ross Girshick et Jian Sun.</span> <cite><a href="https://proceedings.neurips.cc/paper/2015/hash/14bfa6bb14875e45bba028a21ed38046-Abstract.html" target="_blank" rel="noopener">Faster R-CNN: Towards real-time object detection with region proposal networks.</a></cite> Advances in Neural Information Processing Systems, 2015.</li>
+          <li class="architecture-ref"><span class="authors">Marcel Sheeny, Emanuele De Pellegrin, Saptarshi Mukherjee, Amir Ahrabian, Sen Wang et Andrew Wallace.</span> <cite><a href="https://ieeexplore.ieee.org/document/9562089/" target="_blank" rel="noopener">RADIATE: A radar dataset for automotive perception in bad weather.</a></cite> IEEE International Conference on Robotics and Automation, 2021.</li>
+          <li class="architecture-ref"><span class="authors">Roman Solovyev, Weimin Wang et Tatiana Gabruseva.</span> <cite><a href="https://doi.org/10.1016/j.imavis.2021.104117" target="_blank" rel="noopener">Weighted boxes fusion: Ensembling boxes from different object detection models.</a></cite> Image and Vision Computing, 107, 2021.</li>
+          <li><span class="authors">Jasper R. R. Uijlings, Koen E. A. van de Sande, Theo Gevers et Arnold W. M. Smeulders.</span> <cite><a href="https://doi.org/10.1007/s11263-013-0620-5" target="_blank" rel="noopener">Selective search for object recognition.</a></cite> International Journal of Computer Vision, 104(2), 2013.</li>
+          <li class="architecture-ref"><span class="authors">Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser et Illia Polosukhin.</span> <cite><a href="https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html" target="_blank" rel="noopener">Attention is all you need.</a></cite> Advances in Neural Information Processing Systems, 2017.</li>
+          <li><span class="authors">Paul Viola et Michael Jones.</span> <cite>Rapid object detection using a boosted cascade of simple features.</cite> IEEE Conference on Computer Vision and Pattern Recognition, 2001.</li>
+        </ol>
+      </details>
+
+      <div class="technical-resources">
+        <h3 class="resource-heading">Documentation et ressources techniques</h3>
+        <p class="resource-intro">Ressources de référence pour la partie localisation, en l'absence d'une bibliographie scientifique vérifiée propre à ce volet.</p>
+        <ul class="reference-list">
+          <li><strong>ROS 2 Jazzy.</strong> <a href="https://docs.ros.org/en/jazzy/" target="_blank" rel="noopener">Documentation officielle de ROS 2 ↗</a></li>
+          <li><strong>robot_localization.</strong> <a href="https://docs.ros.org/en/jazzy/p/robot_localization/" target="_blank" rel="noopener">Documentation du paquet de fusion d'état EKF/UKF ↗</a></li>
+          <li><strong>CARLA.</strong> <a href="https://carla.readthedocs.io/en/latest/" target="_blank" rel="noopener">Documentation officielle du simulateur ↗</a></li>
+        </ul>
+      </div>
     </div>
   </section>
 </main>
