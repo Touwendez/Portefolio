@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapports et bibliographie · Touwende Ouedraogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e14; --panel:#111720; --panel-2:#0d1218; --border:#1e2935;
+    --border-soft:#161f29; --text:#e6edf3; --text-dim:#7e8c9a;
+    --text-faint:#4d5a68; --mint:#5effb8; --coral:#ff7a59; --radius:10px;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg); color:var(--text); font-family:'Inter',sans-serif;
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:linear-gradient(rgba(94,255,184,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(94,255,184,.025) 1px,transparent 1px);
+    background-size:48px 48px;
+  }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; position:relative; z-index:1; }
+  h1,h2,h3{ font-family:'Space Grotesk',sans-serif; font-weight:600; letter-spacing:-.01em; }
+  a{ color:var(--mint); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  nav{
+    position:sticky; top:0; z-index:50; background:rgba(10,14,20,.85);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--border-soft);
+  }
+  nav .wrap{ min-height:64px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+  .nav-brand{ display:flex; align-items:center; gap:12px; color:var(--text); }
+  .nav-brand:hover{ text-decoration:none; }
+  .nav-avatar{ width:36px; height:36px; border-radius:50%; object-fit:cover; border:1.5px solid rgba(94,255,184,.45); }
+  .nav-id{ font-family:'Space Grotesk'; font-weight:600; font-size:16px; }
+  .nav-id span{ color:var(--mint); }
+  .nav-links{ display:flex; align-items:center; gap:24px; list-style:none; }
+  .nav-links a{ color:var(--text-dim); font:14px 'IBM Plex Mono',monospace; }
+  .nav-links a:hover{ color:var(--mint); text-decoration:none; }
+  header{ padding:88px 0 64px; }
+  .eyebrow{ color:var(--coral); font:12px 'IBM Plex Mono',monospace; margin-bottom:16px; }
+  h1{ font-size:44px; line-height:1.1; margin-bottom:16px; }
+  .lead{ max-width:720px; color:var(--text-dim); font-size:16px; }
+  section{ padding:64px 0; border-top:1px solid var(--border-soft); scroll-margin-top:80px; }
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:30px; }
+  .sec-head .tag{ color:var(--coral); font:12px 'IBM Plex Mono',monospace; white-space:nowrap; }
+  .sec-head h2{ font-size:28px; }
+  .sec-head::after{ content:""; flex:1; height:1px; background:var(--border-soft); }
+  .report-card{
+    display:grid; grid-template-columns:minmax(0,1fr) auto; gap:28px; align-items:center;
+    padding:30px; background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+  }
+  .report-card h3{ font-size:21px; margin-bottom:8px; }
+  .report-card p{ color:var(--text-dim); font-size:14.5px; max-width:700px; }
+  .meta{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 0; }
+  .pill{ color:var(--text-dim); border:1px solid var(--border-soft); border-radius:5px; padding:4px 9px; font:12px 'IBM Plex Mono',monospace; }
+  .actions{ display:flex; flex-direction:column; gap:10px; min-width:190px; }
+  .btn{
+    display:inline-flex; justify-content:center; align-items:center; padding:11px 16px;
+    border:1px solid var(--border); border-radius:6px; color:var(--text);
+    font:13px 'IBM Plex Mono',monospace; transition:.15s;
+  }
+  .btn:hover{ color:var(--mint); border-color:var(--mint); text-decoration:none; }
+  .btn.primary{ background:var(--mint); border-color:var(--mint); color:var(--bg); font-weight:500; }
+  .btn.primary:hover{ background:transparent; color:var(--mint); }
+  .note{
+    margin-top:18px; padding:14px 16px; border-left:2px solid var(--coral);
+    background:var(--panel-2); color:var(--text-dim); font-size:13px;
+  }
+  .reference-list{ display:grid; gap:12px; list-style:none; }
+  .reference-list li{ padding:16px 18px; border:1px solid var(--border-soft); border-radius:8px; background:var(--panel); color:var(--text-dim); font-size:14px; }
+  .reference-list strong{ color:var(--text); }
+  footer{ padding:36px 0; border-top:1px solid var(--border-soft); color:var(--text-faint); font:12px 'IBM Plex Mono',monospace; }
+  @media (max-width:720px){
+    nav .wrap{ padding-top:12px; padding-bottom:12px; align-items:flex-start; }
+    .nav-links{ gap:12px; flex-wrap:wrap; justify-content:flex-end; }
+    .nav-links a{ font-size:12px; }
+    header{ padding:64px 0 48px; }
+    h1{ font-size:34px; }
+    .report-card{ grid-template-columns:1fr; padding:22px; }
+    .actions{ min-width:0; }
+  }
+  @media (max-width:480px){
+    .wrap{ padding-left:20px; padding-right:20px; }
+    nav .wrap{ display:block; }
+    .nav-links{ justify-content:flex-start; margin-top:8px; }
+    .sec-head h2{ font-size:23px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img class="nav-avatar" src="media/photo-avatar.jpg" alt="Portrait de Touwende Ouedraogo" width="36" height="36">
+      <span class="nav-id">TOUWENDE <span>OUEDRAOGO</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Portfolio</a></li>
+      <li><a href="#percepflow">PercepFlow</a></li>
+      <li><a href="#localisation">Localisation</a></li>
+      <li><a href="#bibliographie">Bibliographie</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">// DOCUMENTATION TECHNIQUE</div>
+    <h1>Rapports et bibliographie</h1>
+    <p class="lead">Rapports publics, documentation technique et références associés aux projets de perception et de localisation multi-capteurs.</p>
+  </div>
+</header>
+
+<main>
+  <section id="percepflow">
+    <div class="wrap">
+      <div class="sec-head"><span class="tag">// 01</span><h2>PercepFlow</h2></div>
+      <article class="report-card">
+        <div>
+          <h3>Fusion multimodale adaptative pour véhicules autonomes</h3>
+          <p>Rapport public de stage de fin d'études consacré à PercepFlow, une architecture de fusion sélective radar, lidar et caméra pour une perception robuste en conduite autonome.</p>
+          <div class="meta">
+            <span class="pill">Rapport de stage</span>
+            <span class="pill">87 pages</span>
+            <span class="pill">2025–2026</span>
+            <span class="pill">PDF</span>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="reports/percepflow-fusion-multimodale.pdf" target="_blank" rel="noopener">Lire le rapport ↗</a>
+          <a class="btn" href="reports/percepflow-fusion-multimodale.pdf" download>Télécharger le PDF</a>
+        </div>
+      </article>
+      <p class="note">Le rapport interne DriveSense n'est pas publié. Seul le rapport public de stage PercepFlow est disponible ici.</p>
+    </div>
+  </section>
+
+  <section id="localisation">
+    <div class="wrap">
+      <div class="sec-head"><span class="tag">// 02</span><h2>Localisation multi-capteurs</h2></div>
+      <article class="report-card">
+        <div>
+          <h3>Localisation pour véhicule autonome — EKF, ROS2 et CARLA</h3>
+          <p>Documentation technique du projet : état de l'art GNSS/INS, LiDAR-SLAM et VIO, intégration sous ROS2, simulation CARLA et fusion par filtre de Kalman étendu.</p>
+          <div class="meta">
+            <span class="pill">ROS2</span>
+            <span class="pill">CARLA</span>
+            <span class="pill">EKF</span>
+            <span class="pill">GNSS / INS</span>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="https://github.com/Touwendez/localisation-multicapteurs-zoe-ros2-carla" target="_blank" rel="noopener">Documentation ↗</a>
+          <a class="btn" href="index.html#proj-localisation">Voir le projet</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="bibliographie">
+    <div class="wrap">
+      <div class="sec-head"><span class="tag">// 03</span><h2>Bibliographie et ressources</h2></div>
+      <ul class="reference-list">
+        <li><strong>PercepFlow.</strong> Rapport public de stage : fusion sélective multicapteurs pour la perception robuste en conduite autonome.</li>
+        <li><strong>RADIATE.</strong> Dataset radar automobile en conditions météorologiques dégradées, utilisé pour l'évaluation expérimentale.</li>
+        <li><strong>ROS 2 — robot_localization.</strong> Ressources techniques relatives à la fusion d'état par EKF pour la localisation.</li>
+        <li><strong>CARLA.</strong> Simulateur open source utilisé pour l'intégration et la validation du pipeline de localisation.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Touwende Ouedraogo · <a href="index.html">Retour au portfolio</a></div>
+</footer>
+</body>
+</html>

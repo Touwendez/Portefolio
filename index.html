@@ -205,7 +205,7 @@
     border-radius:5px; padding:5px 10px; margin-bottom:14px;
   }
   .stack-row{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
-  .proj-links{ display:flex; gap:16px; font-family:'IBM Plex Mono'; font-size:13px; }
+  .proj-links{ display:flex; flex-wrap:wrap; gap:16px; font-family:'IBM Plex Mono'; font-size:13px; }
   .proj-links a{ color:var(--text-dim); }
   .proj-links a:hover{ color:var(--mint); }
 
@@ -281,6 +281,7 @@
       <li><a href="#experience">Expériences</a></li>
       <li><a href="#projects">Projets</a></li>
       <li><a href="#demos">Démos</a></li>
+      <li><a href="reports.html">Rapports</a></li>
       <li><a href="#education">Formation</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -489,8 +490,8 @@
             stratégie d'entraînement par phases et une évaluation comparative par capteur.
           </p>
           <p>
-            <strong style="color:var(--mint)">Résultats : +21 points de mAP</strong> vs l'approche règles
-            expertes, évalué sur 22 séquences / 11 312 images annotées en conditions dégradées (brouillard,
+            <strong style="color:var(--mint)">Résultats : PercepFlow 36,02 % de mAP · Knowledge Based Gating 29,01 %</strong>
+            (+7,01 points), évalué sur 22 séquences / 11 338 images annotées en conditions dégradées (brouillard,
             pluie, neige, nuit). Travaux orientés publication.
           </p>
           <div class="stack-row">
@@ -499,6 +500,7 @@
           </div>
           <div class="proj-links">
             <a href="#demo-drivesense">Voir la démo ↗</a>
+            <a href="reports.html#percepflow">Rapport complet ↗</a>
             <a href="https://github.com/Touwendez" target="_blank" rel="noopener">Dépôts (sur demande) ↗</a>
           </div>
         </div>
@@ -562,6 +564,7 @@
           </div>
           <div class="proj-links">
             <a href="#demo-carla">Voir la démo ↗</a>
+            <a href="reports.html#localisation">Rapport technique ↗</a>
             <a href="https://github.com/Touwendez/localisation-multicapteurs-zoe-ros2-carla" target="_blank" rel="noopener">Voir le dépôt ↗</a>
           </div>
         </div>
@@ -851,6 +854,14 @@
 <section id="other-projects">
   <div class="wrap">
     <div class="sec-head"><span class="tag">// 06</span><h2>Travaux complémentaires &amp; rapports techniques</h2></div>
+
+    <div class="other-grid">
+      <div class="other-card">
+        <div class="ot-title">Rapports et bibliographie</div>
+        <div class="ot-desc">Consulter le rapport public PercepFlow, la documentation de localisation et les références associées.</div>
+        <a href="reports.html">Consulter les rapports ↗</a>
+      </div>
+    </div>
 
     <div class="group-label">Volets complémentaires : DriveSense</div>
     <div class="other-grid">
